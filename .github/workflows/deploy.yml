@@ -34,9 +34,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v20
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          vercel-args: "--prod"
+          node-version: "18"
+
+      - name: Deploy to Vercel
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Pass GitHub token as an environment variable
+        run: |
+          npx vercel deploy --prod -t ${{ secrets.VERCEL_TOKEN }} --yes
