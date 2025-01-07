@@ -5,4 +5,4 @@ app = FastAPI()
 
 @app.get("/")
 async def hello():
-    return {"message": "Hello, Vercel!"}
+    return {"message": "Hello there!"}
